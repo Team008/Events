@@ -1,22 +1,73 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "events", "events\events.csproj", "{FCD1A592-599B-4B3F-B126-63D99B5EC105}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FCD1A592-599B-4B3F-B126-63D99B5EC105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FCD1A592-599B-4B3F-B126-63D99B5EC105}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FCD1A592-599B-4B3F-B126-63D99B5EC105}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FCD1A592-599B-4B3F-B126-63D99B5EC105}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace events
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtsubmit_Click(object sender, EventArgs e)
+        {
+            if (btnyes.Checked)
+            {
+                FileStream fs = new FileStream("events.txt", FileMode.Append);
+                StreamWriter sw = new StreamWriter(fs);
+                String startdate = txtsmonth.Text + "-" + txtsday.Text + "-" + txtsyear.Text;
+                String enddate = txtendm.Text + "-" + txteday.Text + "-" + txteyear.Text;
+                
+                String name = txtname.Text;
+                
+                String start = startdate;
+                String end = enddate;
+                String place = txtplace.Text;
+                String Event = name + "@" + place + "@" + start + "@" + end + "//";
+                sw.WriteLine(Event);
+      
+
+                sw.Close();
+                MessageBox.Show("Successful");
+
+            
+            if(btno.Checked)
+            {
+                Application.Exit();
+                
+               
+            }
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        }
+    }
+

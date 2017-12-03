@@ -1,0 +1,67 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace WindowsFormsApp3
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void Add(object sender, EventArgs e)
+        {
+            string[] r = System.IO.File.ReadAllLines("NGR.txt");
+            // Displaying all Options in the Combobox.
+            foreach (string l in r)
+            {
+                string f = l;
+                string[] ff = f.Split('@');
+                comboBox1.Items.Add(ff[0]);
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           string r = comboBox1.SelectedItem.ToString();
+                string[] rs = System.IO.File.ReadAllLines("NGR.txt");
+                foreach (string a in rs)
+                {
+                    string p = a;
+                    string[] pp = a.Split('@');
+                    if (r == pp[0])
+                    {
+                    // The item we chose from the box all in 1 string.
+                    string All = pp[0] + '@' + pp[1] + '@' + pp[2] + '@' + pp[3] + '@' + pp[4] + '@' + pp[5];
+                    // Making the form we use to Update the event we want.
+                    Form3 f = new Form3(All);
+                    f.ShowDialog();
+                    this.Close();
+                    break;
+                    
+                    
+                    
+                    }
+                    else
+                        continue;
+                }
+        }
+    }
+}

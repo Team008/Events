@@ -33,7 +33,7 @@ namespace Events_Scheduler
         {
             DateTime StartD =DateTime.Parse(EStartDate);
             TimeSpan IsToday = DateTime.Now.Date.Subtract(StartD);
-            if (IsToday==null)
+            if (IsToday.ToString()=="00:00:00")
             {
                 MessageBox.Show(EName + " at " + EStartTime, "Today Is :");
             }

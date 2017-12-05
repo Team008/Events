@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,13 +10,14 @@ namespace Events_Scheduler
 {
     class AddingE
     {
-        public string EName;
-        public string EPlace;
-        public string EStartDate;
-        public string EStartTime;
-        public string E_EndDate;
+        // Adding Event Class data members
+        public string EName; // contain  Event name
+        public string EPlace; // contain the place where the event will be
+        public string EStartDate; // contain the start date of Event
+        public string EStartTime; // contain the start time of Event
+        public string E_EndDate; // contain the end date of event
 
-
+        // this function writing the event data in file
         public void Writing_in_file()
         {
             string filename = "Events";
@@ -29,6 +30,7 @@ namespace Events_Scheduler
             MessageBox.Show("Successful Submitting", "Great Job");
         }
 
+        // this function show message of name and time of event only if it is today
         public void TodayTimeReminder()
         {
             DateTime StartD =DateTime.Parse(EStartDate);

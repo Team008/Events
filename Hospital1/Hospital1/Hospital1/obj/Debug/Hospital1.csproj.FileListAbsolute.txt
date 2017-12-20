@@ -1,0 +1,13 @@
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\bin\Debug\Hospital1.exe.config
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\bin\Debug\Hospital1.exe
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\bin\Debug\Hospital1.pdb
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.csprojResolveAssemblyReference.cache
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.Form1.resources
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.Properties.Resources.resources
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.csproj.GenerateResource.Cache
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.exe
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.pdb
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.hospital2.resources
+c:\users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.patient.resources
+C:\Users\7adidy\Documents\Visual Studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.displaydrinfo.resources
+C:\Users\7adidy\documents\visual studio 2013\Projects\Hospital1\Hospital1\obj\Debug\Hospital1.patientdisplay.resources

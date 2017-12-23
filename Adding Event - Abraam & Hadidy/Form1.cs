@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +20,8 @@ namespace Events_Scheduler
         string Dones = "Done Events.txt"; // Done Events file name
         string FileName = "Coming Events.txt"; // coming Events file name
 
+        private bool mouseDown;
+        private Point lastLocation;
         public AddingEvent()
         {  
             InitializeComponent();
@@ -27,10 +29,8 @@ namespace Events_Scheduler
             timer1.Start();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -64,7 +64,7 @@ namespace Events_Scheduler
             }
             catch { };
 
-            // read cdone events from the file and store it in the vector
+            // read done events from the file and store it in the vector
             try
             {
                
@@ -107,6 +107,16 @@ namespace Events_Scheduler
 
 
 
+           
+
+        }
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.FormBorderStyle = FormBorderStyle.None;
+            Start_Date.Value = DateTime.Today;
+            End_Date.Value = DateTime.Today;
+            ReminderTimePicker.Value = DateTime.Today;
             // check if there is an event reminder and display a message
             for (int i = 0; i < EventsData.Count; i++)
             {
@@ -114,13 +124,11 @@ namespace Events_Scheduler
                 TimeSpan IsToday = DateTime.Now.Date.Subtract(Reminder);
                 if (IsToday.ToString() == "00:00:00")
                 {
-                    MessageBox.Show("There is:\n" + EventsData[i].EName + "\n At " + EventsData[i].EStartTime +" "+ EventsData[i].EStartDate, "Remember!");
+                    MessageBox.Show("There is:\n" + EventsData[i].EName + "\n At " + EventsData[i].EStartTime + " " + EventsData[i].EStartDate, "Remember!");
                 }
             }
-
         }
-    
-
+     
         // textbox will contain event name 
         private void textBox1_Click(object sender, EventArgs e)
         {
@@ -133,21 +141,12 @@ namespace Events_Scheduler
         private void textBox2_Click(object sender, EventArgs e)
         {
             // clear it when you click on it
-            if (EventPlace.Text == "Location")
+            if (EventPlace.Text == "Event's Location")
             {
                 EventPlace.Text = "";
             } 
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
 
         // make the textbox of hours accept numbers only
         // else show an error message
@@ -162,10 +161,7 @@ namespace Events_Scheduler
            
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
+       
 
         // make the textbox of minutes accept numbers only
         // else show an error message
@@ -194,11 +190,7 @@ namespace Events_Scheduler
             S_T_Minutes.Text = "";
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void label7_Click(object sender, EventArgs e)
         {
             
@@ -210,94 +202,9 @@ namespace Events_Scheduler
             DateTime dateTime = DateTime.Now;
             this.Time_Now.Text = dateTime.ToString();
         }
-
-        private void EventName_Leave(object sender, EventArgs e)
-        {
-
-        }
         
-
-        private void EventPlace_Leave(object sender, EventArgs e)
-        { 
-            
-        }
-
-        private void Start_Date_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void EventPlace_TextChanged(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void S_T_Hours_TextChanged(object sender, EventArgs e)
-        {
-
-
-        }
-     
-    private void EventName_TextChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void Start_Date_ValueChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void End_Date_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Done_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-        private void Submit_Btn_Click(object sender, EventArgs e)
-        {
-           
-          
-            
-        }
-
-
-        // make the user enter only hours from 0 to 12 in hours cell
-        private void S_T_Hours_Leave(object sender, EventArgs e)
-        {
-            int a = int.Parse(S_T_Hours.Text);
-            if ((a > 12) || (a< 0))
-            {
-                MessageBox.Show("Please Enter Valid Time!", "Error!");
-                S_T_Hours.Text = "";
-                S_T_Hours.Focus();
-            }
-        }
-
         // make the user enter only minutes from 0 to 59 in hours cell
-        private void S_T_Minutes_Leave(object sender, EventArgs e)
-        {
-            int a = int.Parse(S_T_Minutes.Text);
-
-            if ((a > 59) || (a < 0))
-            {
-
-                MessageBox.Show("Please Enter Valid Time!", "Error!");
-                S_T_Minutes.Text = "";
-                S_T_Minutes.Focus();
-            }
-        }
-
-        private void label7_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
+       
         // if you check yes done radio button make the no done radio button unchecked
         private void yesDone_CheckedChanged(object sender, EventArgs e)
         {
@@ -316,201 +223,42 @@ namespace Events_Scheduler
             }
         }
 
-        private void yesDone_Click(object sender, EventArgs e)
-        {
-
-            noDone.Checked = false;
-        }
-
-        // clear buuton that clear all data to start a new form
-        private void claering_Click(object sender, EventArgs e)
-        {
-           
-           
-        }
-
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        // a (new form) from menu strip that start a blank form with no data
-        private void newFormToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AddingEvent NewForm = new AddingEvent();
-            NewForm.Show();
-            this.Dispose(false);
-        }
-
-        // an (Exit) from menu strip that make the application exit 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        // an help from menu strip that show who we are
-        private void aboutMeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("We are ...", "About Us:");
-        }
+    
 
         private void txtremdate_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
+        
         private void pictureBox8_Click(object sender, EventArgs e)
         {
-            AddingEvent NewForm = new AddingEvent();
-            NewForm.Show();
-            this.Dispose(false);
+
+            EventName.Text = "Event's Name";
+            EventName.Focus();
+            EventName.SelectAll();
+            EventPlace.Text = "Event's Location";
+            Start_Date.Value = DateTime.Today;
+            S_T_Hours.Text = "HR";
+            S_T_Minutes.Text = "MN";
+            A_P_M.SelectedIndex = -1;
+            A_P_M.Text = "AM/PM";
+           
+            End_Date.Value = DateTime.Today;
+            ReminderTimePicker.Value = DateTime.Today;
+            yesDone.Checked = false;
+            noDone.Checked = false;
         }
 
         // submit button if there is a missing data or an error show an error provider next to the cell
         // else accept and submit the data to the file
-        private void pictureBox9_Click(object sender, EventArgs e)
-        {
-            // clear the errors every sumbitting and check for errors again
-            errorProvider1.Clear();
+        
 
-            // check if it is no name and give error
-            if ((EventName.Text == "") || (EventName.Text == "Event's Name"))
-            {
-                errorProvider1.SetError(this.EventName, "Please Enter Event's Name");
-                EventName.Focus();
-            }
-
-            // check if it is no place and give error
-            else if ((EventPlace.Text == "") || (EventPlace.Text == "Location"))
-            {
-                errorProvider1.SetError(this.EventPlace, "Please Enter Event's Place");
-                EventPlace.Focus();
-            }
-
-            // check if it is no start date and give error
-            else if (Start_Date.Value.ToString() == "")
-            {
-                errorProvider1.SetError(this.Start_Date, "Please Enter Start Day Date");
-                Start_Date.Focus();
-            }
-
-            // check if it is no start time hours  and give error
-            else if ((S_T_Hours.Text == "") || (S_T_Hours.Text == "HR"))
-            {
-                errorProvider1.SetError(this.S_T_Hours, "Please Start Day Time");
-                S_T_Hours.Focus();
-            }
-            
-
-            // check if it is no sart time minutes and give error
-            else if ((S_T_Minutes.Text == "") || (S_T_Minutes.Text == "MN"))
-            {
-                errorProvider1.SetError(this.S_T_Minutes, "Please Start Day Time");
-                S_T_Minutes.Focus();
-            }
-
-            // check if it is no choice of (am) or (pm) and give error
-            else if (A_P_M.SelectedIndex == -1)
-            {
-                errorProvider1.SetError(this.A_P_M, "Please Choose am or pm");
-                A_P_M.Focus();
-            }
-
-            // check if it is no end date and give error
-            else if (End_Date.Value.ToString() == "")
-            {
-                errorProvider1.SetError(this.End_Date, "Please Enter End Day Date");
-                End_Date.Focus();
-            }
-            else if(End_Date.Value<Start_Date.Value)
-            {
-                errorProvider1.SetError(this.End_Date, "The End Date must not be before Start Date");
-                errorProvider1.SetError(this.Start_Date, "The Start Date must not be After End Date");
-                Start_Date.Focus();
-                End_Date.Focus();
-            }
-
-            // check if is no reminder time and give error
-            else if (ReminderTimePicker.Value.ToString() == "")
-            {
-                errorProvider1.SetError(this.ReminderTimePicker, "Please Enter The Reminder Time ");
-                ReminderTimePicker.Focus();
-            }
-
-            
-
-            // check if it is no choice of yes done and give error
-            else if (yesDone.Checked == false)
-            {
-                errorProvider1.SetError(this.yesDone, "Please Check Yes Done To Sumbit The Event");
-                noDone.Checked = false;
-            }
-
-            
-
-            // if thers is no error submitting the data to file
-            else
-            {
-                // check if there is intersection with another event
-                bool notIntersects = false;
-                if (EventsData.Count == 0)
-                {
-                    notIntersects = true;
-                }
-                else
-                {
-                    for (int i = 0; i < EventsData.Count; i++)
-                    {
-                        DateTime start = Convert.ToDateTime(EventsData[i].EStartDate);
-                        DateTime end = Convert.ToDateTime(EventsData[i].E_EndDate);
-
-                        if (((Start_Date.Value < start) && (End_Date.Value < start)) || ((Start_Date.Value > end) && (End_Date.Value > end)))
-                        {
-
-                            notIntersects = true;
-                            
-                        }
-                        else
-                        {
-                            notIntersects = false;
-                        }
-
-                    }
-
-                }
-
-                // if no intersection sumbit
-                if (notIntersects == true)
-                {                
-                    Event AddingEvent = new Event(); // object of adding event class
-                                                     // copy the data of event to the class members
-
-                    AddingEvent.EName = EventName.Text;
-                    AddingEvent.EPlace = EventPlace.Text;
-                    AddingEvent.EStartDate = Start_Date.Value.ToShortDateString();
-                    AddingEvent.EStartTime = S_T_Hours.Text + ":" + S_T_Minutes.Text + " " + A_P_M.SelectedItem.ToString();
-                    AddingEvent.E_EndDate = End_Date.Value.ToShortDateString();
-                    AddingEvent.E_ReminderTime = ReminderTimePicker.Value.ToShortDateString();
-
-                    // Adding the class event in the vector
-                    EventsData.Add(AddingEvent);
-                    MessageBox.Show("Successful Submitting", "Great Job");
-                }
-
-                // if there is intersection sow messagebox
-                else if(notIntersects==false)
-                {
-                    MessageBox.Show("The Event Intersects with another Event\nYou must change The Dates", "Error!");
-                }
-            }
-
-
-
-        }
+           
 
         // storing data in files while form closing
         private void AddingEvent_FormClosing(object sender, FormClosingEventArgs e)
         {
+
             // storing coming events in file
             if (EventsData.Count != 0)
             {
@@ -552,13 +300,270 @@ namespace Events_Scheduler
         }
 
         // check if the reminder after start date show error message
-        private void ReminderTimePicker_Leave(object sender, EventArgs e)
+        
+        
+        private void button1_Click(object sender, EventArgs e)
         {
-            if(ReminderTimePicker.Value>Start_Date.Value)
+            // clear the errors every sumbitting and check for errors again
+          
+            errorProvider1.Clear();
+
+            // check if it is no name and give error
+
+            if ((EventName.Text == "") || (EventName.Text == "Event's Name"))
             {
-                MessageBox.Show("The Reminder must not Be After Start Date!", "Error!");
+                errorProvider1.SetError(EventName, "Please Enter Event's Name");
+                EventName.Focus();
+            }
+
+            // check if it is no place and give error
+            else if ((EventPlace.Text == "") || (EventPlace.Text == "Event's Location"))
+            {
+                errorProvider1.SetError(this.EventPlace, "Please Enter Event's Place");
+                EventPlace.Focus();
+            }
+
+            // check if it is no start date and give error
+            else if (this.Start_Date.Value.ToString()=="")
+            {
+                errorProvider1.SetError(this.Start_Date, "Please Enter Start Day Date");
+                Start_Date.Focus();
+            }
+
+            else if (Start_Date.Value < DateTime.Today.AddDays(1))
+            {
+                errorProvider1.SetError(this.Start_Date, "The Evnet Must Be At Least Tomorrow");
+                Start_Date.Value = DateTime.Today.AddDays(1);
+            }
+
+            // check if it is no start time hours  and give error
+            else if ((S_T_Hours.Text == "") || (S_T_Hours.Text == "HR"))
+            {
+                errorProvider1.SetError(this.S_T_Hours, "Please Start Day Time");
+                S_T_Hours.Focus();
+            }
+
+
+            else if ((int.Parse(S_T_Hours.Text) > 12) || (int.Parse(S_T_Hours.Text) < 0))
+            {
+                errorProvider1.SetError(this.S_T_Hours, "Please Enter Valid Hour (0->12) ");
+                S_T_Hours.Text = "";
+                S_T_Hours.Focus();
+            }
+
+            else if (S_T_Hours.Text.Length == 1)
+            {
+                int a = int.Parse(S_T_Hours.Text);
+                S_T_Hours.Text = "0" + S_T_Hours.Text;
+            }
+           
+            // check if it is no sart time minutes and give error
+            else if ((S_T_Minutes.Text == "") || (S_T_Minutes.Text == "MN"))
+            {
+                errorProvider1.SetError(S_T_Minutes, "Please Enter Start Day Time");
+                S_T_Minutes.Focus();
+            }
+
+            else if ((int.Parse(S_T_Minutes.Text) > 59) || (int.Parse(S_T_Minutes.Text) < 0))
+            {
+                errorProvider1.SetError(this.S_T_Minutes, "Please Enter Valid Minute (0 -> 59)");
+                S_T_Minutes.Text = "";
+                S_T_Minutes.Focus();
+            }
+
+            // check if it is no choice of (am) or (pm) and give error
+            else if (A_P_M.SelectedIndex == -1)
+            {
+                errorProvider1.SetError(this.A_P_M, "Please Choose am or pm");
+                A_P_M.Focus();
+            }
+
+            else if ((int.Parse(S_T_Hours.Text) == 12) && (A_P_M.SelectedIndex == 0))
+            {
+                S_T_Hours.Text = "00";
+            }
+
+            // check if it is no end date and give error
+            else if (End_Date.Value.ToString() == "")
+            {
+                errorProvider1.SetError(this.End_Date, "Please Enter End Day Date");
+                End_Date.Focus();
+            }
+            else if (End_Date.Value < Start_Date.Value)
+            {
+                errorProvider1.SetError(this.End_Date, "The End Date must not be before Start Date");
+                errorProvider1.SetError(this.Start_Date, "The Start Date must not be After End Date");
+                Start_Date.Focus();
+                End_Date.Focus();
+            }
+
+            // check if is no reminder time and give error
+            else if (ReminderTimePicker.Value.ToString() == "")
+            {
+                errorProvider1.SetError(this.ReminderTimePicker, "Please Enter The Reminder Time ");
                 ReminderTimePicker.Focus();
             }
+            
+            else if(ReminderTimePicker.Value<DateTime.Today)
+            {
+                errorProvider1.SetError(this.ReminderTimePicker, "Please Enter A Valid Reminder Time");
+                ReminderTimePicker.Focus();
+            }
+
+            else if (ReminderTimePicker.Value >= Start_Date.Value)
+            {
+                errorProvider1.SetError(this.ReminderTimePicker,"The Reminder must not Be After Or Equal Start Date");
+                ReminderTimePicker.Focus();
+            }
+
+            // check if it is no choice of yes done and give error
+            else if (yesDone.Checked == false)
+            {
+                errorProvider1.SetError(this.yesDone, "Please Check Yes Done To Sumbit The Event");
+                noDone.Checked = false;
+            }
+
+
+
+            // if thers is no error submitting the data to file
+            else
+            {
+                // check if there is intersection with another event
+                bool Intersects = false;
+
+                for (int i = 0; i < EventsData.Count; i++)
+                {
+                    DateTime DataStartD = Convert.ToDateTime(EventsData[i].EStartDate);
+                    DateTime DataEndD = Convert.ToDateTime(EventsData[i].E_EndDate);
+
+                    if ((Start_Date.Value == DataStartD) || (End_Date.Value == DataEndD))
+                    {
+                        Intersects = true;
+                        break;
+                    }
+                    else if ((End_Date.Value == DataStartD) || (Start_Date.Value == DataEndD))
+                    {
+                        Intersects = true;
+                        break;
+                    }
+                    else if ((Start_Date.Value > DataStartD) && (End_Date.Value < DataEndD))
+                    {
+                        Intersects = true;
+                        break;
+                    }
+                    else if ((Start_Date.Value < DataStartD) && (End_Date.Value > DataEndD))
+                    {
+                        Intersects = true;
+                        break;
+                    }
+                    else if ((Start_Date.Value < DataStartD) && (End_Date.Value > DataStartD))
+                    {
+                        Intersects = true;
+                        break;
+                    }
+                    else if ((Start_Date.Value < DataEndD) && (End_Date.Value > DataEndD))
+                    {
+                        Intersects = true;
+                        break;
+                    }
+
+
+
+                }
+
+
+
+                // if no intersection sumbit
+                if (Intersects == false)
+                {
+                    Event AddingEvent = new Event(); // object of adding event class
+                                                     // copy the data of event to the class members
+
+                    AddingEvent.EName = EventName.Text;
+                    AddingEvent.EPlace = EventPlace.Text;
+                    AddingEvent.EStartDate = Start_Date.Value.ToShortDateString();
+                    AddingEvent.EStartTime = S_T_Hours.Text + ":" + S_T_Minutes.Text + " " + A_P_M.SelectedItem.ToString();
+                    AddingEvent.E_EndDate = End_Date.Value.ToShortDateString();
+                    AddingEvent.E_ReminderTime = ReminderTimePicker.Value.ToShortDateString();
+
+                    // Adding the class event in the vector
+                    EventsData.Add(AddingEvent);
+                    MessageBox.Show("Successful Submitting", "Great Job");
+                   
+                }
+
+                // if there is intersection sow messagebox
+                else if (Intersects == true)
+                {
+                    MessageBox.Show("The Event Intersects with another Event\nYou must change The Dates", "Error!");
+                }
+
+            }
+    }
+
+      
+       
+
+        private void pictureBox11_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void pictureBox12_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState != FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Normal;
+        }
+
+        private void pictureBox10_Click_1(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void label1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void label1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void label1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
     }
 }
